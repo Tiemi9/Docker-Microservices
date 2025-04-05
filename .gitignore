@@ -1,0 +1,11 @@
+.env# Ignorar arquivos sensíveis
+.env
+
+# Ignorar arquivos temporários
+*.log
+*.tmp
+*.bak
+
+# Ignorar arquivos de sistema
+.DS_Store
+Thumbs.db

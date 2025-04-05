@@ -1,0 +1,6 @@
+# Ignorar arquivos sensíveis
+.env
+
+# Ignorar arquivos do Git
+.git
+.gitignore

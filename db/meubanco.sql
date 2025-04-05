@@ -1,0 +1,11 @@
+CREATE DATABASE meubanco;
+USE meubanco;
+
+CREATE TABLE dados (
+    PessoaID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(255) NOT NULL,
+    Sobrenome VARCHAR(255) NOT NULL,
+    Endereco VARCHAR(255) NOT NULL,
+    Cidade VARCHAR(255) NOT NULL,
+    Host VARCHAR(255) NOT NULL
+);

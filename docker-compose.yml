@@ -1,0 +1,34 @@
+services:
+  # Para rodar a lógica localmente
+  php: 
+    image: php:8.2-fpm
+    volumes:
+      - ./app:/var/www/html
+    env_file:
+      - ./app/.env
+    networks:
+      - app-network
+
+# para balancear as cargas entre os servidores externos
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/nginx.conf
+    ports:
+      - "4500:4500"
+    networks:
+      - app-network
+
+# pertinente ao banco de dados
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
