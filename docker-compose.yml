@@ -1,34 +1,42 @@
 services:
-  # Para rodar a lógica localmente
-  php: 
-    image: php:8.2-fpm
-    volumes:
-      - ./app:/var/www/html
-    env_file:
-      - ./app/.env
+  # Constrói imagem para executar o php usando dockerfile
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80" # Porta para acessar o PHP
     networks:
       - app-network
 
-# para balancear as cargas entre os servidores externos
+  # Usa a imagem do Nginx para gerenciar o balanceamento de carga e servir requisições HTTP.
   nginx:
     image: nginx:latest
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/nginx.conf
     ports:
-      - "4500:4500"
+      - "4500:4500" # Porta para acessar o Nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf # Arquivo de configuração personalizado
     networks:
       - app-network
 
-# pertinente ao banco de dados
+  # cria e executa um container que fornece o serviço MySQL
   mysql:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: meubanco
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Senha123
     volumes:
-      - ./db:/docker-entrypoint-initdb.d
+      - db_data:/var/lib/mysql # Volume para persistência de dados do banco
     networks:
       - app-network
 
 networks:
+  # Conecta todos os serviços, permitindo que eles se comuniquem entre si
   app-network:
-    driver: bridge
+    driver: overlay # Permite uso no Docker Swarm
+
+# para armazenamento persistente
+volumes:
+  db_data: # Volume para dados persistentes do MySQL
