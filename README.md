@@ -2,8 +2,7 @@
 
 ### Docker | PHP | MySQL | Nginx
 
-A proposta desse projeto foi criar um cluster de microsserviços com balanceamento de carga, utilizando Docker. O recusro utilizado foi o Swarm, as máquinas virtuais foram criadas na AWS, para o banco de dados usamos o MySQL, 
-Ministrado por Denilson Bonatti, na plataforma da DIO, em parceria com Santander Tech - Linux para Iniciantes. 
+A proposta desse projeto foi criar um cluster de microsserviços com balanceamento de carga, utilizando Docker. O recusro utilizado foi o Swarm, as máquinas virtuais foram criadas na AWS, para o banco de dados usamos o MySQL. Ministrado por Denilson Bonatti, na plataforma da DIO, em parceria com Santander Tech - Linux para Iniciantes. 
 
 ## Aprendizado
 
